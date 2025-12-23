@@ -77,6 +77,20 @@ select {
   color: #111827;
 }
 
+.helper-text {
+  margin: -0.35rem 0 0.1rem;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.helper-text--error {
+  color: #dc2626;
+}
+
+.helper-text--valid {
+  color: #16a34a;
+}
+
 @media (max-width: 540px) {
   #root {
     margin: 1.5rem;
