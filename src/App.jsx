@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import './App.css'
 
 const letters = "abcdefghijklmnopqrstuvwxyz"
@@ -8,13 +8,20 @@ const symbols = "!@#$%^&*()-_=+[]{}|;:'\\\",.<>?/`~"
 function App() {
 
   const [utente, setUtente] = useState({
-    nomeCompleto: "",
     username: "",
     password: "",
-    specializzazione: "",
-    anniEsperienza: "",
     descrizione: "",
   })
+
+  const nomeCompletoRef = useRef(null)
+  const specializzazioneRef = useRef(null)
+  const anniEsperienzaRef = useRef(null)
+
+  useEffect(() => {
+    if (nomeCompletoRef.current) {
+      nomeCompletoRef.current.focus()
+    }
+  }, [])
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -27,14 +34,11 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    const {
-      nomeCompleto,
-      username,
-      password,
-      specializzazione,
-      anniEsperienza,
-      descrizione,
-    } = utente
+    const nomeCompleto = nomeCompletoRef.current?.value || ""
+    const specializzazione = specializzazioneRef.current?.value || ""
+    const anniEsperienza = anniEsperienzaRef.current?.value || ""
+
+    const { username, password, descrizione } = utente
 
     if (
       !nomeCompleto.trim() ||
@@ -68,6 +72,30 @@ function App() {
       ...utente,
       anniEsperienza: anni,
     })
+  }
+
+  const handleReset = () => {
+    setUtente({
+      username: "",
+      password: "",
+      descrizione: "",
+    })
+
+    if (nomeCompletoRef.current) {
+      nomeCompletoRef.current.value = ""
+    }
+
+    if (specializzazioneRef.current) {
+      specializzazioneRef.current.value = ""
+    }
+
+    if (anniEsperienzaRef.current) {
+      anniEsperienzaRef.current.value = ""
+    }
+
+    if (nomeCompletoRef.current) {
+      nomeCompletoRef.current.focus()
+    }
   }
 
   const validateUsername = (value) => {
@@ -192,8 +220,7 @@ function App() {
           type="text"
           name="nomeCompleto"
           placeholder="Nome completo"
-          value={utente.nomeCompleto}
-          onChange={handleChange}
+          ref={nomeCompletoRef}
         />
 
         <input
@@ -230,8 +257,7 @@ function App() {
 
         <select
           name="specializzazione"
-          value={utente.specializzazione}
-          onChange={handleChange}
+          ref={specializzazioneRef}
         >
           <option value="">Seleziona la specializzazione</option>
           <option value="Full Stack">Full Stack</option>
@@ -243,8 +269,7 @@ function App() {
           type="number"
           name="anniEsperienza"
           placeholder="Anni di esperienza"
-          value={utente.anniEsperienza}
-          onChange={handleChange}
+          ref={anniEsperienzaRef}
           min="1"
         />
 
@@ -265,6 +290,19 @@ function App() {
 
         <button type="submit">Registrati</button>
       </form>
+      <button type="button" onClick={handleReset} className="reset-button">
+        Reset
+      </button>
+
+      <button
+        type="button"
+        className="scroll-top"
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: "smooth" })
+        }}
+      >
+        ↑
+      </button>
     </>
   )
 }

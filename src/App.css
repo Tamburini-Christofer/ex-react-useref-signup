@@ -67,6 +67,24 @@ button[type="submit"]:active {
   box-shadow: 0 6px 16px rgba(79, 70, 229, 0.35);
 }
 
+.reset-button {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background-color: #f3f4f6;
+  color: #374151;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.reset-button:hover {
+  background-color: #e5e7eb;
+  border-color: #d1d5db;
+}
+
 /* Piccoli dettagli */
 input::placeholder,
 textarea::placeholder {
@@ -89,6 +107,32 @@ select {
 
 .helper-text--valid {
   color: #16a34a;
+}
+
+.scroll-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+  cursor: pointer;
+  z-index: 50;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.scroll-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(79, 70, 229, 0.5);
+  filter: brightness(1.05);
 }
 
 @media (max-width: 540px) {
